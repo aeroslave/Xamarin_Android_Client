@@ -1,0 +1,33 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.421
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HallOfFameClient.Android", "HallOfFameClient\HallOfFameClient.Android\HallOfFameClient.Android.csproj", "{8225F989-D24F-493C-A34A-875D40C34F0F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HallOfFameClient", "HallOfFameClient\HallOfFameClient\HallOfFameClient.csproj", "{75B2944D-78C8-4BF4-80C1-0FEC2AA7E96F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8225F989-D24F-493C-A34A-875D40C34F0F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8225F989-D24F-493C-A34A-875D40C34F0F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8225F989-D24F-493C-A34A-875D40C34F0F}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{8225F989-D24F-493C-A34A-875D40C34F0F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8225F989-D24F-493C-A34A-875D40C34F0F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8225F989-D24F-493C-A34A-875D40C34F0F}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{75B2944D-78C8-4BF4-80C1-0FEC2AA7E96F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{75B2944D-78C8-4BF4-80C1-0FEC2AA7E96F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{75B2944D-78C8-4BF4-80C1-0FEC2AA7E96F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{75B2944D-78C8-4BF4-80C1-0FEC2AA7E96F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {08862BDC-00F4-41E3-89C3-2DA84963C268}
+	EndGlobalSection
+EndGlobal
