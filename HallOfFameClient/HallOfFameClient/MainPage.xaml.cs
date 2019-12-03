@@ -13,5 +13,10 @@ namespace HallOfFameClient
         {
             InitializeComponent();
         }
+
+        private void Button_OnClicked(object sender, EventArgs e)
+        {
+            Label.Text = "Button is clicked!";
+        }
     }
 }
