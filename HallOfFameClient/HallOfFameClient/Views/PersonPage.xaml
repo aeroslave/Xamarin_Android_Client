@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="HallOfFameClient.Views.PersonPage">
+    <ContentPage.Content>
+        <StackLayout>
+            <Label x:Name="NameLabel"/>
+            <ListView
+                  ItemsSource="{Binding Skills}"
+                  SeparatorColor="Red">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+
+                                    <Label Text="Наименование: " Grid.Column="0" Grid.Row="0"/>
+                                    <Entry Text="{Binding Name}" Grid.Column="1" Grid.Row="0"/>
+
+                                    <Label Text="Уровень: " Grid.Column="0" Grid.Row="1"/>
+                                    <Entry Text="{Binding Level}" Grid.Column="1" Grid.Row="1"/>
+                                </Grid>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+            <StackLayout Orientation="Horizontal" Margin="10">
+                <Button Text="Добавить навык"
+                        BorderColor="AliceBlue"
+                        BorderWidth="1"
+                        WidthRequest="150"
+                        Clicked="AddSkillButton_OnClicked"/>
+                <Button Text="Сохранить" HorizontalOptions="EndAndExpand" 
+                        BorderColor="AliceBlue"
+                        BorderWidth="1"
+                        WidthRequest="150"/>
+            </StackLayout>
+            
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

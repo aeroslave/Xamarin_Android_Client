@@ -1,6 +1,7 @@
 ﻿namespace HallOfFameClient.Models
 {
     using System.Collections.Generic;
+    using System.Collections.ObjectModel;
 
     /// <summary>
     /// Модель пользователя.
@@ -15,6 +16,6 @@
         /// <summary>
         /// Список навыков.
         /// </summary>
-        public List<Skill> Skills { get; set; }
+        public ObservableCollection<Skill> Skills { get; set; }
     }
 }

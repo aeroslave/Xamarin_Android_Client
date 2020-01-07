@@ -5,36 +5,23 @@
              xmlns:local="clr-namespace:HallOfFameClient"
              x:Class="HallOfFameClient.MainPage">
 
-  <StackLayout>
-    <!-- Place new controls here -->
-    <Label x:Name="Label"
-           Text="Welcome to Xamarin.Forms!"
-           HorizontalOptions="Center"
-           VerticalOptions="CenterAndExpand" />
+    <StackLayout>
+        <!-- Place new controls here -->
+        <Label x:Name="Label"
+               Text="Welcome to Xamarin.Forms!"
+               HorizontalOptions="Center"
+               VerticalOptions="CenterAndExpand" />
 
-    <ListView x:Name="PersonList"
-              ItemsSource="{Binding Persons}"
-              SeparatorColor="Red">
-      <ListView.ItemTemplate>
-        <DataTemplate>
-          <ViewCell>
-            <StackLayout>
-              <Label Text="{Binding Name}" />
-              <ListView ItemsSource="{Binding Skills}">
-                <ListView.ItemTemplate>
-                  <DataTemplate>
+        <ListView x:Name="PersonList"
+                  ItemsSource="{Binding Persons}"
+                  SeparatorColor="Red"
+                  ItemSelected="PersonList_ItemSelected">
+            <ListView.ItemTemplate>
+                <DataTemplate>
                     <TextCell Text="{Binding Name}" />
-                  </DataTemplate>
-                </ListView.ItemTemplate>
-              </ListView>
-              <Label Text="{Binding Name}" />
-            </StackLayout>
-          </ViewCell>
-        </DataTemplate>
-      </ListView.ItemTemplate>
-    </ListView>
-
-    <Button Text="Hello World" Clicked="Button_OnClicked" />
-  </StackLayout>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </StackLayout>
 
 </ContentPage>

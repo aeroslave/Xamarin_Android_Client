@@ -16,4 +16,16 @@
   <ItemGroup>
     <Folder Include="ViewModels\" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Xamarin.Forms.Platform.Android">
+      <HintPath>C:\Users\vskon\.nuget\packages\xamarin.forms\3.4.0.1008975\lib\MonoAndroid10\Xamarin.Forms.Platform.Android.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Views\PersonPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
 </Project>

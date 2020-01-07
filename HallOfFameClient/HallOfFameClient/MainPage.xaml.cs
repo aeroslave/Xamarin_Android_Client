@@ -2,8 +2,10 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Collections.ObjectModel;
 
     using HallOfFameClient.Models;
+    using HallOfFameClient.Views;
 
     using Xamarin.Forms;
 
@@ -40,12 +42,12 @@
                 new Person
                 {
                     Name = "John Smith",
-                    Skills = new List<Skill> { js, karate }
+                    Skills = new ObservableCollection<Skill> { js, karate }
                 },
                 new Person
                 {
                     Name = "Robert Robertson",
-                    Skills = new List<Skill> { skillLang, netCore }
+                    Skills = new ObservableCollection<Skill> { skillLang, netCore }
                 }
             };
 
@@ -55,9 +57,17 @@
 
         public List<Person> Persons { get; set; }
 
-        private void Button_OnClicked(object sender, EventArgs e)
+        //private async void PushToPersonPage(object sender, EventArgs e)
+        //{
+        //    await Navigation.PushAsync(new PersonPage());
+        //}
+
+        private async void PersonList_ItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
-            Label.Text = "Button is clicked!";
+            if (!(e.SelectedItem is Person person))
+                return;
+
+            await Navigation.PushAsync(new PersonPage(person));
         }
     }
 }
