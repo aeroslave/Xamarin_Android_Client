@@ -5,23 +5,36 @@
              xmlns:local="clr-namespace:HallOfFameClient"
              x:Class="HallOfFameClient.MainPage">
 
-    <StackLayout>
-        <!-- Place new controls here -->
-        <Label x:Name="Label"
-               Text="Welcome to Xamarin.Forms!"
-               HorizontalOptions="Center"
-               VerticalOptions="CenterAndExpand" />
-
-        <ListView x:Name="PersonList"
-                  ItemsSource="{Binding Persons}"
+    <StackLayout Margin="5">
+        <ListView ItemsSource="{Binding Persons}"
                   SeparatorColor="Red"
-                  ItemSelected="PersonList_ItemSelected">
+                  SelectedItem="{Binding SelectedPerson}"
+                  SelectionMode="Single">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <TextCell Text="{Binding Name}" />
+                    <ViewCell>
+                        <StackLayout>
+                            <Label Text="{Binding Name}"/>
+                            <!--<StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer NumberOfTapsRequired="2" 
+                                                      Tapped="NameDoubleTapped"/>
+                            </StackLayout.GestureRecognizers>-->
+                        </StackLayout>
+                    </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
+
+        <StackLayout Orientation="Horizontal">
+            <Button Text="Добавить сотрудника" 
+                    Clicked="AddPersonButton_OnClicked"
+                    WidthRequest="150"/>
+            
+            <Button Text="Удалить сотрудника" 
+                    HorizontalOptions="EndAndExpand"
+                    Clicked="DeleteButton_OnClicked"
+                    WidthRequest="150"/>
+        </StackLayout>
     </StackLayout>
 
 </ContentPage>

@@ -1,16 +1,18 @@
 ﻿namespace HallOfFameClient
 {
     using System;
-    using System.Collections.Generic;
     using System.Collections.ObjectModel;
+    using System.ComponentModel;
 
     using HallOfFameClient.Models;
     using HallOfFameClient.Views;
 
     using Xamarin.Forms;
 
-    public partial class MainPage : ContentPage
+    public partial class MainPage : ContentPage, INotifyPropertyChanged
     {
+        private Person _selectedPerson;
+
         public MainPage()
         {
             var skillLang = new Skill
@@ -37,7 +39,7 @@
                 Level = 3
             };
 
-            Persons = new List<Person>
+            Persons = new ObservableCollection<Person>
             {
                 new Person
                 {
@@ -55,19 +57,51 @@
             BindingContext = this;
         }
 
-        public List<Person> Persons { get; set; }
+        public ObservableCollection<Person> Persons { get; set; }
 
-        //private async void PushToPersonPage(object sender, EventArgs e)
-        //{
-        //    await Navigation.PushAsync(new PersonPage());
-        //}
-
-        private async void PersonList_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+        public Person SelectedPerson
         {
-            if (!(e.SelectedItem is Person person))
+            get => _selectedPerson;
+            set
+            {
+                _selectedPerson = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private async void AddPersonButton_OnClicked(object sender, EventArgs e)
+        {
+            var person = new Person
+            {
+                Name = "Введите имя",
+                Skills = new ObservableCollection<Skill>
+                {
+                    new Skill
+                    {
+                        Name = "Введите наименовение навыка",
+                        Level = 0
+                    }
+                }
+            };
+
+            Persons.Add(person);
+            await Navigation.PushAsync(new PersonPage(person));
+        }
+
+        private void DeleteButton_OnClicked(object sender, EventArgs e)
+        {
+            if (SelectedPerson == null)
                 return;
 
-            await Navigation.PushAsync(new PersonPage(person));
+            Persons.Remove(SelectedPerson);
+        }
+
+        private async void NameDoubleTapped(object sender, EventArgs e)
+        {
+            if (SelectedPerson == null)
+                return;
+
+            await Navigation.PushAsync(new PersonPage(SelectedPerson));
         }
     }
 }

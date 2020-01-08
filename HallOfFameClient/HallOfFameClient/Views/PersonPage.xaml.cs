@@ -1,7 +1,6 @@
 ﻿namespace HallOfFameClient.Views
 {
     using System;
-    using System.Collections.Generic;
     using System.Collections.ObjectModel;
 
     using HallOfFameClient.Models;
@@ -24,14 +23,9 @@
             InitializeComponent();
 
             Title = "Перечень навыков";
-            NameLabel.Text = person.Name;
+            //NameLabel.Text = person.Name;
             Skills = person.Skills;
             BindingContext = person;
-        }
-
-        private async void Button_OnClicked(object sender, EventArgs e)
-        {
-            await Navigation.PopAsync();
         }
 
         private void AddSkillButton_OnClicked(object sender, EventArgs e)
