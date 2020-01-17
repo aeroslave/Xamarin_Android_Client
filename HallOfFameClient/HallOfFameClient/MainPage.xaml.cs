@@ -3,6 +3,8 @@
     using System;
     using System.Collections.ObjectModel;
     using System.ComponentModel;
+    using System.Net.Http;
+    using System.Threading.Tasks;
 
     using HallOfFameClient.Models;
     using HallOfFameClient.Views;
@@ -55,6 +57,15 @@
 
             InitializeComponent();
             BindingContext = this;
+        }
+
+        /// <summary>
+        /// Метод получения сотрудников.
+        /// </summary>
+        public async void GetPersons()
+        {
+            var client = new HttpClient();
+            var response = await client.GetStringAsync("somesite");
         }
 
         public ObservableCollection<Person> Persons { get; set; }
