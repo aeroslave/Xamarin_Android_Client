@@ -1,6 +1,7 @@
 ﻿namespace HallOfFameClient.Views
 {
     using System;
+    using System.Collections.Generic;
     using System.Collections.ObjectModel;
 
     using HallOfFameClient.Models;
@@ -11,7 +12,7 @@
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class PersonPage : ContentPage
     {
-        public ObservableCollection<Skill> Skills { get; set; }
+        public List<Skill> Skills { get; set; }
 
         public PersonPage()
         {

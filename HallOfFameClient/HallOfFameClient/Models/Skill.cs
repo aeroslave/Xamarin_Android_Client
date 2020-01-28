@@ -13,6 +13,6 @@
         /// <summary>
         /// Уровень.
         /// </summary>
-        public int Level { get; set; }
+        public byte Level { get; set; }
     }
 }

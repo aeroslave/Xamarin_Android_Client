@@ -1,6 +1,7 @@
 ﻿namespace HallOfFameClient
 {
     using System;
+    using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.ComponentModel;
     using System.Net.Http;
@@ -8,6 +9,8 @@
 
     using HallOfFameClient.Models;
     using HallOfFameClient.Views;
+
+    using Newtonsoft.Json;
 
     using Xamarin.Forms;
 
@@ -46,18 +49,20 @@
                 new Person
                 {
                     Name = "John Smith",
-                    Skills = new ObservableCollection<Skill> { js, karate }
+                    Skills = new List<Skill> { js, karate }
                 },
                 new Person
                 {
                     Name = "Robert Robertson",
-                    Skills = new ObservableCollection<Skill> { skillLang, netCore }
+                    Skills = new List<Skill> { skillLang, netCore }
                 }
             };
-
+            Task.Run(() => GetPersons());
             InitializeComponent();
             BindingContext = this;
         }
+
+        public HttpClient HttpClient { get; set; }
 
         /// <summary>
         /// Метод получения сотрудников.
@@ -65,7 +70,14 @@
         public async void GetPersons()
         {
             var client = new HttpClient();
-            var response = await client.GetStringAsync("somesite");
+            
+            var response = await client.GetAsync("http://192.168.0.105:52480/api/persons");
+
+            if (response.IsSuccessStatusCode)
+            {
+                var responseContent = await response.Content.ReadAsStringAsync();
+                var persons = JsonConvert.DeserializeObject<Person>(responseContent);
+            }
         }
 
         public ObservableCollection<Person> Persons { get; set; }
@@ -85,7 +97,7 @@
             var person = new Person
             {
                 Name = "Введите имя",
-                Skills = new ObservableCollection<Skill>
+                Skills = new List<Skill>
                 {
                     new Skill
                     {

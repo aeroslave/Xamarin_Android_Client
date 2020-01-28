@@ -16,6 +16,6 @@
         /// <summary>
         /// Список навыков.
         /// </summary>
-        public ObservableCollection<Skill> Skills { get; set; }
+        public List<Skill> Skills { get; set; }
     }
 }
