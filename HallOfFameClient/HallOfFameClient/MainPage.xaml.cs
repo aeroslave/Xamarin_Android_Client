@@ -76,7 +76,9 @@
             if (response.IsSuccessStatusCode)
             {
                 var responseContent = await response.Content.ReadAsStringAsync();
-                var persons = JsonConvert.DeserializeObject<Person>(responseContent);
+                // Надо использовать List<Person> передается же список, возможно надо IEnumerable использовать.
+                // TODO Проверить изменения.
+                var persons = JsonConvert.DeserializeObject<List<Person>>(responseContent);
             }
         }
 
