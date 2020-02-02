@@ -8,24 +8,26 @@
     <StackLayout Margin="5">
         <ListView ItemsSource="{Binding Persons}"
                   SeparatorColor="Red"
-                  SelectedItem="{Binding SelectedPerson}"
-                  SelectionMode="Single">
+                  SelectedItem="{Binding SelectedPerson, Mode=TwoWay}"
+                  SelectionMode="Single"
+                  HasUnevenRows="True"
+                  RefreshCommand="{Binding GetPersonsCommand}">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
                         <StackLayout>
                             <Label Text="{Binding Name}"/>
-                            <!--<StackLayout.GestureRecognizers>
+                            <StackLayout.GestureRecognizers>
                                 <TapGestureRecognizer NumberOfTapsRequired="2" 
                                                       Tapped="NameDoubleTapped"/>
-                            </StackLayout.GestureRecognizers>-->
+                            </StackLayout.GestureRecognizers>
                         </StackLayout>
                     </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
 
-        <StackLayout Orientation="Horizontal">
+        <!--<StackLayout Orientation="Horizontal">
             <Button Text="Добавить сотрудника" 
                     Clicked="AddPersonButton_OnClicked"
                     WidthRequest="150"/>
@@ -34,7 +36,7 @@
                     HorizontalOptions="EndAndExpand"
                     Clicked="DeleteButton_OnClicked"
                     WidthRequest="150"/>
-        </StackLayout>
+        </StackLayout>-->
     </StackLayout>
 
 </ContentPage>

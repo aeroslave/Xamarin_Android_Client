@@ -3,130 +3,103 @@
     using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
-    using System.ComponentModel;
     using System.Net.Http;
+    using System.Runtime.InteropServices;
     using System.Threading.Tasks;
 
     using HallOfFameClient.Models;
+    using HallOfFameClient.ViewModels;
     using HallOfFameClient.Views;
 
     using Newtonsoft.Json;
 
     using Xamarin.Forms;
 
-    public partial class MainPage : ContentPage, INotifyPropertyChanged
+    public partial class MainPage: ContentPage
     {
-        private Person _selectedPerson;
+        //private Person _selectedPerson;
+
+        private readonly MainPageVM _mainPageVM;
 
         public MainPage()
         {
-            var skillLang = new Skill
-            {
-                Name = "C#",
-                Level = 5
-            };
 
-            var netCore = new Skill
-            {
-                Name = ".NetCore",
-                Level = 6
-            };
-
-            var karate = new Skill
-            {
-                Name = "Karate",
-                Level = 7
-            };
-
-            var js = new Skill
-            {
-                Name = "java script",
-                Level = 3
-            };
-
-            Persons = new ObservableCollection<Person>
-            {
-                new Person
-                {
-                    Name = "John Smith",
-                    Skills = new List<Skill> { js, karate }
-                },
-                new Person
-                {
-                    Name = "Robert Robertson",
-                    Skills = new List<Skill> { skillLang, netCore }
-                }
-            };
-            Task.Run(() => GetPersons());
+            //Persons = new ObservableCollection<Person>();
+            //Task.Run(() => GetPersons());
             InitializeComponent();
-            BindingContext = this;
+            _mainPageVM = new MainPageVM{Navigation = Navigation};
+            BindingContext = _mainPageVM;
         }
 
-        public HttpClient HttpClient { get; set; }
+        protected override async void OnAppearing()
+        {
+            await _mainPageVM.GetPersonsAsync();
+            base.OnAppearing();
+        }
 
         /// <summary>
         /// Метод получения сотрудников.
         /// </summary>
-        public async void GetPersons()
-        {
-            var client = new HttpClient();
+        //public async void GetPersons()
+        //{
+        //    var client = new HttpClient();
             
-            var response = await client.GetAsync("http://192.168.0.105:52480/api/persons");
+        //    var response = await client.GetAsync("http://192.168.0.105:52480/api/persons");
 
-            if (response.IsSuccessStatusCode)
-            {
-                var responseContent = await response.Content.ReadAsStringAsync();
-                // Надо использовать List<Person> передается же список, возможно надо IEnumerable использовать.
-                // TODO Проверить изменения.
-                var persons = JsonConvert.DeserializeObject<List<Person>>(responseContent);
-            }
-        }
+        //    if (response.IsSuccessStatusCode)
+        //    {
+        //        var responseContent = await response.Content.ReadAsStringAsync();
+        //        var persons = JsonConvert.DeserializeObject<List<Person>>(responseContent);
+        //        foreach (var person in persons)
+        //            Persons.Add(person);
+        //    }
+        //}
 
-        public ObservableCollection<Person> Persons { get; set; }
+        //public ObservableCollection<Person> Persons { get; set; }
 
-        public Person SelectedPerson
-        {
-            get => _selectedPerson;
-            set
-            {
-                _selectedPerson = value;
-                OnPropertyChanged();
-            }
-        }
+        //public Person SelectedPerson
+        //{
+        //    get => _selectedPerson;
+        //    set
+        //    {
+        //        _selectedPerson = value;
+        //        OnPropertyChanged();
+        //    }
+        //}
 
-        private async void AddPersonButton_OnClicked(object sender, EventArgs e)
-        {
-            var person = new Person
-            {
-                Name = "Введите имя",
-                Skills = new List<Skill>
-                {
-                    new Skill
-                    {
-                        Name = "Введите наименовение навыка",
-                        Level = 0
-                    }
-                }
-            };
+        //private async void AddPersonButton_OnClicked(object sender, EventArgs e)
+        //{
+        //    var person = new Person
+        //    {
+        //        Name = "Введите имя",
+        //        Skills = new List<Skill>
+        //        {
+        //            new Skill
+        //            {
+        //                Name = "Введите наименовение навыка",
+        //                Level = 0
+        //            }
+        //        }
+        //    };
 
-            Persons.Add(person);
-            await Navigation.PushAsync(new PersonPage(person));
-        }
+        //    Persons.Add(person);
+        //    await Navigation.PushAsync(new PersonPage(person));
+        //}
 
-        private void DeleteButton_OnClicked(object sender, EventArgs e)
-        {
-            if (SelectedPerson == null)
-                return;
+        //private void DeleteButton_OnClicked(object sender, EventArgs e)
+        //{
+        //    if (SelectedPerson == null)
+        //        return;
 
-            Persons.Remove(SelectedPerson);
-        }
+        //    Persons.Remove(SelectedPerson);
+        //}
 
         private async void NameDoubleTapped(object sender, EventArgs e)
         {
-            if (SelectedPerson == null)
+            if (_mainPageVM.SelectedPerson == null)
                 return;
 
-            await Navigation.PushAsync(new PersonPage(SelectedPerson));
+            await Navigation.PushAsync(new PersonPage(_mainPageVM.SelectedPerson));
         }
     }
 }
