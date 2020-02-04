@@ -1,18 +1,14 @@
 ﻿namespace HallOfFameClient.ViewModels
 {
-    using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.ComponentModel;
     using System.Linq;
-    using System.Net.Http;
     using System.Runtime.CompilerServices;
     using System.Threading.Tasks;
     using System.Windows.Input;
 
     using HallOfFameClient.Models;
     using HallOfFameClient.Service;
-
-    using Newtonsoft.Json;
 
     using Xamarin.Forms;
 
@@ -21,7 +17,14 @@
         /// <summary>
         /// Сервис взаимодействия с API.
         /// </summary>
-        private PersonsService _personsService = new PersonsService();
+        private readonly PersonsService _personsService = new PersonsService();
+
+        private bool _isRefreshing;
+
+        /// <summary>
+        /// Выбранный пользователь.
+        /// </summary>
+        private Person _selectedPerson;
 
         /// <summary>
         /// Конструктор.
@@ -33,17 +36,28 @@
             GetPersons();
         }
 
+        /// <summary>
+        /// Команда получения списка пользователей.
+        /// </summary>
         public ICommand GetPersonsCommand { get; protected set; }
+
+        /// <summary>
+        /// Флаг обновления списка пользователей.
+        /// </summary>
+        public bool IsRefreshing
+        {
+            get => _isRefreshing;
+            set
+            {
+                _isRefreshing = value;
+                OnPropertyChanged();
+            }
+        }
 
         /// <summary>
         /// Навигатор.
         /// </summary>
         public INavigation Navigation { get; set; }
-
-        /// <summary>
-        /// Выбранный пользователь.
-        /// </summary>
-        private Person _selectedPerson;
 
         /// <summary>
         /// Список пользователей.
@@ -65,11 +79,6 @@
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-
         /// <summary>
         /// Получение сотрудников.
         /// </summary>
@@ -84,14 +93,23 @@
         public async Task GetPersonsAsync()
         {
             while (Persons.Any())
-            {
                 Persons.RemoveAt(Persons.Count - 1);
-            }
+
+            IsRefreshing = true;
 
             var persons = await _personsService.GetPersonsAsync();
 
             foreach (var person in persons)
+            {
                 Persons.Add(person);
+            }
+
+            IsRefreshing = false;
+        }
+
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

@@ -11,7 +11,9 @@
                   SelectedItem="{Binding SelectedPerson, Mode=TwoWay}"
                   SelectionMode="Single"
                   HasUnevenRows="True"
-                  RefreshCommand="{Binding GetPersonsCommand}">
+                  RefreshCommand="{Binding GetPersonsCommand}"
+                  IsPullToRefreshEnabled="True"
+                  IsRefreshing="{Binding IsRefreshing}">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
