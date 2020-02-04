@@ -9,6 +9,7 @@
 
     using HallOfFameClient.Models;
     using HallOfFameClient.Service;
+    using HallOfFameClient.Views;
 
     using Xamarin.Forms;
 
@@ -33,6 +34,7 @@
         {
             Persons = new ObservableCollection<Person>();
             GetPersonsCommand = new Command(GetPersons);
+            ShowPersonCommand = new Command(ShowPersonPage);
             GetPersons();
         }
 
@@ -40,6 +42,11 @@
         /// Команда получения списка пользователей.
         /// </summary>
         public ICommand GetPersonsCommand { get; protected set; }
+
+        /// <summary>
+        /// Команда перехода на страницу пользователя.
+        /// </summary>
+        public ICommand ShowPersonCommand { get; set; }
 
         /// <summary>
         /// Флаг обновления списка пользователей.
@@ -74,6 +81,7 @@
             {
                 _selectedPerson = value;
                 OnPropertyChanged();
+                ShowPersonCommand.Execute(null);
             }
         }
 
@@ -85,6 +93,14 @@
         public void GetPersons()
         {
             Task.Run(GetPersonsAsync);
+        }
+
+        /// <summary>
+        /// Показать страницу пользователя.
+        /// </summary>
+        public async void ShowPersonPage()
+        {
+            await Navigation.PushAsync(new PersonPage(new PersonPageVM(SelectedPerson)));
         }
 
         /// <summary>

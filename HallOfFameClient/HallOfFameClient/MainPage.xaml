@@ -19,10 +19,6 @@
                     <ViewCell>
                         <StackLayout>
                             <Label Text="{Binding Name}"/>
-                            <StackLayout.GestureRecognizers>
-                                <TapGestureRecognizer NumberOfTapsRequired="2" 
-                                                      Tapped="NameDoubleTapped"/>
-                            </StackLayout.GestureRecognizers>
                         </StackLayout>
                     </ViewCell>
                 </DataTemplate>
