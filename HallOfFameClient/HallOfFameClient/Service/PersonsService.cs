@@ -5,6 +5,7 @@
     using System.Threading.Tasks;
 
     using HallOfFameClient.Models;
+    using HallOfFameClient.Utils;
 
     using Newtonsoft.Json;
 
@@ -18,8 +19,9 @@
         public async Task<List<Person>> GetPersonsAsync()
         {
             var client = GetClient();
+            var url = ConnectionUtils.GetAddressConnection();
 
-            var result = await client.GetStringAsync(URL);
+            var result = await client.GetStringAsync(url);
 
             return JsonConvert.DeserializeObject<List<Person>>(result);
         }
