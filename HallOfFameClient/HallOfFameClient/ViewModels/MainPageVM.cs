@@ -35,7 +35,7 @@
             Persons = new ObservableCollection<Person>();
             GetPersonsCommand = new Command(GetPersons);
             ShowPersonCommand = new Command(ShowPersonPage);
-            GetPersons();
+            //GetPersons();
         }
 
         /// <summary>

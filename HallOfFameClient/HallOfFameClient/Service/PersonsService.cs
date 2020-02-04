@@ -19,9 +19,9 @@
         public async Task<List<Person>> GetPersonsAsync()
         {
             var client = GetClient();
-            var url = ConnectionUtils.GetAddressConnection();
+            //var url = ConnectionUtils.GetAddressConnection();
 
-            var result = await client.GetStringAsync(url);
+            var result = await client.GetStringAsync(URL);
 
             return JsonConvert.DeserializeObject<List<Person>>(result);
         }
