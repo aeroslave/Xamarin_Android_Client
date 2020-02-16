@@ -10,7 +10,6 @@
                   SeparatorColor="Red"
                   SelectedItem="{Binding SelectedPerson, Mode=TwoWay}"
                   SelectionMode="Single"
-                  HasUnevenRows="True"
                   RefreshCommand="{Binding GetPersonsCommand}"
                   IsPullToRefreshEnabled="True"
                   IsRefreshing="{Binding IsRefreshing}">
