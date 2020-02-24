@@ -1,9 +1,6 @@
 ﻿namespace HallOfFameClient
 {
-    using System;
-
     using HallOfFameClient.ViewModels;
-    using HallOfFameClient.Views;
 
     using Xamarin.Forms;
 
@@ -11,10 +8,10 @@
     {
         private readonly MainPageVM _mainPageVM;
 
-        public MainPage()
+        public MainPage(string url)
         {
             InitializeComponent();
-            _mainPageVM = new MainPageVM { Navigation = Navigation };
+            _mainPageVM = new MainPageVM { Navigation = Navigation, Url = url};
             BindingContext = _mainPageVM;
         }
 
@@ -22,15 +19,6 @@
         {
             await _mainPageVM.GetPersonsAsync();
             base.OnAppearing();
-        }
-
-        private async void NameDoubleTapped(object sender, EventArgs e)
-        {
-            if (_mainPageVM.SelectedPerson == null)
-                return;
-
-            var personPageVm = new PersonPageVM(_mainPageVM.SelectedPerson);
-            await Navigation.PushAsync(new PersonPage(personPageVm));
         }
     }
 }

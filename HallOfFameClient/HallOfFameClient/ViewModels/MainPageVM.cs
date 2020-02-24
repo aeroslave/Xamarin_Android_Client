@@ -20,12 +20,33 @@
         /// </summary>
         private readonly PersonsService _personsService = new PersonsService();
 
+        /// <summary>
+        /// Флаг обновления.
+        /// </summary>
         private bool _isRefreshing;
+
+        /// <summary>
+        /// Адрес апи.
+        /// </summary>
+        public string Url
+        {
+            get { return _url; }
+            set
+            {
+                _url = value; 
+                OnPropertyChanged();
+            }
+        }
 
         /// <summary>
         /// Выбранный пользователь.
         /// </summary>
         private Person _selectedPerson;
+
+        /// <summary>
+        /// Адрес апи.
+        /// </summary>
+        private string _url;
 
         /// <summary>
         /// Конструктор.
@@ -113,7 +134,7 @@
 
             IsRefreshing = true;
 
-            var persons = await _personsService.GetPersonsAsync();
+            var persons = await _personsService.GetPersonsAsync(Url);
 
             foreach (var person in persons)
             {

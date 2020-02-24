@@ -4,6 +4,8 @@
 
 namespace HallOfFameClient
 {
+    using HallOfFameClient.Views;
+
     using Xamarin.Forms;
 
     public partial class App : Application
@@ -12,7 +14,7 @@ namespace HallOfFameClient
         {
             InitializeComponent();
 
-            MainPage = new NavigationPage(new MainPage());
+            MainPage = new NavigationPage(new ConnectPage());
         }
 
         protected override void OnResume()
