@@ -5,14 +5,11 @@
     using System.Threading.Tasks;
 
     using HallOfFameClient.Models;
-    using HallOfFameClient.Utils;
 
     using Newtonsoft.Json;
 
     public class PersonsService
     {
-        private const string URL = "http://192.168.0.105:52480/api/persons";
-
         /// <summary>
         /// Метод получения сотрудников.
         /// </summary>

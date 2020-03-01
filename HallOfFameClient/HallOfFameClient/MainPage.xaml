@@ -23,17 +23,6 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-
-        <!--<StackLayout Orientation="Horizontal">
-            <Button Text="Добавить сотрудника" 
-                    Clicked="AddPersonButton_OnClicked"
-                    WidthRequest="150"/>
-            
-            <Button Text="Удалить сотрудника" 
-                    HorizontalOptions="EndAndExpand"
-                    Clicked="DeleteButton_OnClicked"
-                    WidthRequest="150"/>
-        </StackLayout>-->
     </StackLayout>
 
 </ContentPage>
